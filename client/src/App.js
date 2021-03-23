@@ -27,7 +27,13 @@ function App() {
   const onSearch = (inputValue) => {
     axios.get(`/api/tickets?searchText=${inputValue}`).then((ticket) => {
       const allTicketList = ticket.data;
-      setTicketsList(allTicketList);
+      if (allTicketList.length > 0) {
+        setTicketsList(allTicketList);
+      } else {
+        setTicketsList([
+          { title: "There are no matching tickets", labels: [] },
+        ]);
+      }
     });
   };
 
