@@ -1,12 +1,11 @@
 require("dotenv").config();
 const app = require("./app");
 const mongoose = require("mongoose");
-const tickets = require("./routes/tickets");
 const env = process.env.NODE_ENV || "production";
 const MONGO_URI =
   env === "test" ? process.env.TEST_MONGO_URI : process.env.MONGO_URI;
 const PORT = process.env.PORT || 8080;
-
+console.log(MONGO_URI);
 mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
