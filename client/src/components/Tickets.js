@@ -4,8 +4,12 @@ import Ticket from "./Ticket";
 export default function Tickets({ ticketsList, hideTicket }) {
   return (
     <div className="all-tickets">
-      {ticketsList.map((ticket) => (
-        <Ticket key={ticket.title} ticket={ticket} hideTicket={hideTicket} />
+      {ticketsList.map((ticket, i) => (
+        <Ticket
+          key={ticket.title + i}
+          ticket={ticket}
+          hideTicket={hideTicket}
+        />
       ))}
     </div>
   );

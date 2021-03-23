@@ -5,35 +5,17 @@ import Tickets from "./components/Tickets";
 import axios from "axios";
 require("dotenv").config();
 
-const initialList = [
-  {
-    title: "ticket 1",
-    content: "some string",
-    email: "idoley01@gmail.com",
-    creationTime: "12/12/2020",
-    labels: ["click", "save"],
-  },
-  {
-    title: "ido",
-    content: "some string",
-    email: "idoley01@gmail.com",
-    creationTime: "10/02/2021",
-    labels: ["push", "update"],
-  },
-];
-
 function App() {
   const [ticketsList, setTicketsList] = useState([]);
-
+  const [counter, setCounter] = useState(0);
   useEffect(() => {
-    onFirstLoad();
+    onLoad();
   }, []);
 
-  const onFirstLoad = async () => {
-    await axios
+  const onLoad = () => {
+    axios
       .get("/api/tickets")
       .then((ticket) => {
-        console.log(ticket.data);
         const allTicketList = ticket.data;
         setTicketsList(allTicketList);
       })
@@ -42,30 +24,39 @@ function App() {
       });
   };
 
+  const onSearch = (inputValue) => {
+    axios.get(`/api/tickets?searchText=${inputValue}`).then((ticket) => {
+      const allTicketList = ticket.data;
+      setTicketsList(allTicketList);
+    });
+  };
+
   const searchOnChange = (e) => {
     const inputValue = e.target.value;
-    console.log(inputValue);
-    console.log(ticketsList);
-    const filterList = initialList.filter((value) => {
-      const lowerCase = value.title.toLowerCase();
-      return lowerCase.includes(inputValue);
-    });
-    console.log(filterList);
-    setTicketsList(filterList);
+    onSearch(inputValue);
   };
 
   const hideTicket = (e) => {
     const ticket = e.target.parentElement;
     console.log(ticket);
+    setCounter(counter + 1);
     ticket.setAttribute("hidden", true);
   };
+
+  // const restoredTickets = () => {
+
+  //   console.log("restore");
+  //   setTicketsList(statelList);
+  // };
+
   return (
     <div className="App">
       <header>Tickets Manager</header>
       <div className="body">
         <Search onChange={searchOnChange} />
-        <div>
-          <span>restored</span>
+        <div className="restore-section">
+          <span>{counter} hidden ticket`s </span>
+          <button id="restoreHideTickets">restored</button>
         </div>
         <Tickets hideTicket={hideTicket} ticketsList={ticketsList} />
       </div>
