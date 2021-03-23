@@ -7,7 +7,6 @@
     rgba(0, 67, 97, 1) 76%,
     rgba(13, 134, 159, 1) 100%
   );
-  height: 100vh;
 }
 
 header {
@@ -28,7 +27,8 @@ header {
 .ticket {
   background: rgba(172, 213, 214, 0.658);
   width: 90vw;
-  margin-left: 5vw;
+  margin-left: 3vw;
+  margin-right: 5vw;
   border-radius: 50px;
   padding: 20px;
   margin-bottom: 20px;
@@ -49,6 +49,8 @@ header {
   width: 400px;
   height: 50px;
   font-size: 30px;
+  padding: 15px;
+  border-radius: 40px;
 }
 .restore-section {
   text-align: center;
@@ -62,4 +64,10 @@ p {
 
 button {
   font-weight: bold;
+  cursor: pointer;
+}
+
+.hideTicketButton {
+  background: rgba(32, 178, 171, 0);
+  border-color: rgba(32, 178, 171, 0);
 }

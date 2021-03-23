@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function Ticket({ ticket, hideTicket }) {
+export default function Ticket({ ticket, hideTicket, ticketNotFound }) {
+  if (ticketNotFound) {
+    return (
+      <div className="ticket-notFound">
+        <h1>{ticketNotFound.title}</h1>
+      </div>
+    );
+  }
   const date = new Date(ticket.creationTime);
   const dateFormat = () => {
     return (
@@ -21,14 +28,6 @@ export default function Ticket({ ticket, hideTicket }) {
       (date.getHours() < 12 ? "AM" : "PM")
     );
   };
-
-  if (ticket.labels.length === 0) {
-    return (
-      <div className="ticket-notFound">
-        <h1>{ticket.title}</h1>
-      </div>
-    );
-  }
   return (
     <div className="ticket">
       <h1>{ticket.title}</h1>

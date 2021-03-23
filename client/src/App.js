@@ -5,6 +5,7 @@ import Tickets from "./components/Tickets";
 import axios from "axios";
 require("dotenv").config();
 
+let hideTickets = [];
 function App() {
   const [ticketsList, setTicketsList] = useState([]);
   const [counter, setCounter] = useState(0);
@@ -27,13 +28,7 @@ function App() {
   const onSearch = (inputValue) => {
     axios.get(`/api/tickets?searchText=${inputValue}`).then((ticket) => {
       const allTicketList = ticket.data;
-      if (allTicketList.length > 0) {
-        setTicketsList(allTicketList);
-      } else {
-        setTicketsList([
-          { title: "There are no matching tickets", labels: [] },
-        ]);
-      }
+      setTicketsList(allTicketList);
     });
   };
 
@@ -44,16 +39,16 @@ function App() {
 
   const hideTicket = (e) => {
     const ticket = e.target.parentElement;
-    console.log(ticket);
+    hideTickets.push(ticket);
     setCounter(counter + 1);
     ticket.setAttribute("hidden", true);
   };
 
-  // const restoredTickets = () => {
-
-  //   console.log("restore");
-  //   setTicketsList(statelList);
-  // };
+  const restoredTickets = () => {
+    hideTickets.map((ticket) => ticket.removeAttribute("hidden"));
+    hideTickets = [];
+    setCounter(0);
+  };
 
   return (
     <div className="App">
@@ -62,7 +57,9 @@ function App() {
         <Search onChange={searchOnChange} />
         <div className="restore-section">
           <span>{counter} hidden ticket`s </span>
-          <button id="restoreHideTickets">restored</button>
+          <button id="restoreHideTickets" onClick={restoredTickets}>
+            restored
+          </button>
         </div>
         <Tickets hideTicket={hideTicket} ticketsList={ticketsList} />
       </div>
