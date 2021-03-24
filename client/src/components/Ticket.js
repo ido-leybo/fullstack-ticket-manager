@@ -1,7 +1,13 @@
 import React from "react";
 import "../styles/ticket.css";
 
-export default function Ticket({ ticket, hideTicket, ticketNotFound }) {
+export default function Ticket({
+  ticket,
+  hideTicket,
+  ticketNotFound,
+  doneTicket,
+  doneTickets,
+}) {
   if (ticketNotFound) {
     return (
       <div className="ticket-notFound">
@@ -29,11 +35,24 @@ export default function Ticket({ ticket, hideTicket, ticketNotFound }) {
       (date.getHours() < 12 ? "AM" : "PM")
     );
   };
+  let className;
+  if (doneTickets.includes(ticket)) {
+    className = "doneTicket";
+  } else {
+    className = "ticket";
+  }
+
   return (
-    <div className="ticket">
+    <div className={className}>
       <span>
-        <button className="hideTicketButton" onClick={() => hideTicket(ticket)}>
+        <button
+          className={"hideTicketButton"}
+          onClick={() => hideTicket(ticket)}
+        >
           hide
+        </button>
+        <button className="doneButton" onClick={(e) => doneTicket(ticket, e)}>
+          {className === "doneTicket" ? "⛔" : "✅"}
         </button>
         <h1>{ticket.title}</h1>
       </span>

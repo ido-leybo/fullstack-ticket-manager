@@ -5,6 +5,7 @@ import Tickets from "./components/Tickets";
 import Counter from "./components/Counter";
 import axios from "axios";
 import AddNewTicket from "./components/AddNewTicket";
+
 require("dotenv").config();
 // const labels = [
 //   "Help",
@@ -24,6 +25,7 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [numOfShowTickets, setNumOfShowTickets] = useState(0);
   const [hideTickets, setHideTickets] = useState([]);
+  const [doneTickets, setDoneTickets] = useState([]);
 
   useEffect(() => {
     onLoad();
@@ -35,6 +37,12 @@ function App() {
       .then((ticket) => {
         const allTicketList = ticket.data;
         baseList = allTicketList;
+        allTicketList.forEach((ticketDone) => {
+          if (ticketDone.done) {
+            doneTickets.push(ticketDone);
+          }
+        });
+        console.log(allTicketList);
         setNumOfShowTickets(allTicketList.length);
         setTicketsList(allTicketList);
       })
@@ -62,7 +70,6 @@ function App() {
     const filterArray = ticketsList.filter(
       (ticketId) => ticket.id !== ticketId.id
     );
-    console.log(hideTickets);
     setTicketsList(filterArray);
     setNumOfShowTickets(filterArray.length);
     setCounter(counter + 1);
@@ -87,6 +94,26 @@ function App() {
     onLoad();
   };
 
+  const doneTicket = (ticket, e) => {
+    let value = e.target.textContent;
+    e.target.textContent = value === "✅" ? "⛔" : "✅";
+
+    if (value === "✅") {
+      doneTickets.push(ticket);
+      e.target.parentElement.parentElement.style.backgroundColor = "gray";
+      axios.patch(`/api/tickets/${ticket.id}/done`);
+    } else {
+      e.target.parentElement.parentElement.style.backgroundColor =
+        "rgba(172, 213, 214, 0.658)";
+      const filterArr = doneTickets.filter(
+        (doneTicket) => doneTicket.id !== ticket.id
+      );
+      axios.patch(`/api/tickets/${ticket.id}/undone`);
+      setDoneTickets(filterArr);
+    }
+    console.log(doneTickets);
+  };
+
   return (
     <div className="App">
       <header>Tickets Manager</header>
@@ -101,7 +128,12 @@ function App() {
             onClick={restoredTickets}
           />
         </div>
-        <Tickets hideTicket={hideTicket} ticketsList={ticketsList} />
+        <Tickets
+          hideTicket={hideTicket}
+          ticketsList={ticketsList}
+          doneTicket={doneTicket}
+          doneTickets={doneTickets}
+        />
       </div>
     </div>
   );

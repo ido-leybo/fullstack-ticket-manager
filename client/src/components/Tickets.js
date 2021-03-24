@@ -1,7 +1,12 @@
 import React from "react";
 import Ticket from "./Ticket";
 
-export default function Tickets({ ticketsList, hideTicket }) {
+export default function Tickets({
+  ticketsList,
+  hideTicket,
+  doneTicket,
+  doneTickets,
+}) {
   if (ticketsList.length === 0) {
     const ticket = {
       title: "No matching tickets found",
@@ -19,6 +24,8 @@ export default function Tickets({ ticketsList, hideTicket }) {
           key={ticket.title + i}
           ticket={ticket}
           hideTicket={hideTicket}
+          doneTicket={doneTicket}
+          doneTickets={doneTickets}
         />
       ))}
     </div>
