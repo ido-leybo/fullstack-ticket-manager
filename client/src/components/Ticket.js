@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/ticket.css";
 
 export default function Ticket({ ticket, hideTicket, ticketNotFound }) {
   if (ticketNotFound) {
