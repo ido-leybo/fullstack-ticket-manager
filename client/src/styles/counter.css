@@ -1,0 +1,13 @@
+.show-tickets-number {
+  font-weight: bold;
+  background-color: rgba(199, 199, 199, 0.603);
+  padding: 5px;
+  border-radius: 5px;
+}
+.counter-section {
+  margin: 10px;
+}
+.restore-section {
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,21 @@
+.ticket {
+  background: rgba(172, 213, 214, 0.658);
+  width: 90vw;
+  margin-left: 3vw;
+  margin-right: 5vw;
+  border-radius: 50px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.ticket-notFound {
+  background: rgba(172, 213, 214, 0.658);
+  width: 90vw;
+  margin-left: 5vw;
+  border-radius: 50px;
+  padding: 20px;
+  text-align: center;
+}
+.hideTicketButton {
+  background: rgba(32, 178, 171, 0);
+  border-color: rgba(32, 178, 171, 0);
+}
