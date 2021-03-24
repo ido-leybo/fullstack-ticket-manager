@@ -7,7 +7,7 @@ export default function Counter({ counter, hideList, showTickets, onClick }) {
       <>
         <div className="counter-section">
           <span className="show-tickets-number">
-            Showing {showTickets} results
+            Showing '{showTickets}' results
           </span>
         </div>
         <span className="hidden-text">
@@ -20,7 +20,9 @@ export default function Counter({ counter, hideList, showTickets, onClick }) {
     );
   } else {
     return (
-      <span className="show-tickets-number">Showing {showTickets} results</span>
+      <span className="show-tickets-number">
+        Showing '{showTickets}' results
+      </span>
     );
   }
 }

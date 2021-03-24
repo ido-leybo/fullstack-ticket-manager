@@ -4,14 +4,26 @@ import Search from "./components/Search";
 import Tickets from "./components/Tickets";
 import Counter from "./components/Counter";
 import axios from "axios";
+import AddNewTicket from "./components/AddNewTicket";
 require("dotenv").config();
-
+// const labels = [
+//   "Help",
+//   "Tech",
+//   "Guidelines",
+//   "Corvid",
+//   "Api",
+//   "Collapse",
+//   "Expand",
+//   "Login",
+//   "Problem",
+//   "Tutorial",
+// ];
 let baseList;
-let hideTickets = [];
 function App() {
   const [ticketsList, setTicketsList] = useState([]);
   const [counter, setCounter] = useState(0);
   const [numOfShowTickets, setNumOfShowTickets] = useState(0);
+  const [hideTickets, setHideTickets] = useState([]);
 
   useEffect(() => {
     onLoad();
@@ -36,7 +48,7 @@ function App() {
       const allTicketList = ticket.data;
       const filterList = notShowIfHide(allTicketList);
       setTicketsList(filterList);
-      setNumOfShowTickets(allTicketList.length);
+      setNumOfShowTickets(filterList.length);
     });
   };
 
@@ -50,6 +62,7 @@ function App() {
     const filterArray = ticketsList.filter(
       (ticketId) => ticket.id !== ticketId.id
     );
+    console.log(hideTickets);
     setTicketsList(filterArray);
     setNumOfShowTickets(filterArray.length);
     setCounter(counter + 1);
@@ -58,8 +71,20 @@ function App() {
   const restoredTickets = () => {
     setNumOfShowTickets(baseList.length);
     setTicketsList(baseList);
-    hideTickets = [];
+    setHideTickets([]);
     setCounter(0);
+  };
+
+  const notShowIfHide = (list) => {
+    let filterArr = list.filter((ticket) => {
+      return !hideTickets.includes(ticket.id);
+    });
+
+    return filterArr;
+  };
+
+  const addNewTicket = () => {
+    onLoad();
   };
 
   return (
@@ -67,6 +92,7 @@ function App() {
       <header>Tickets Manager</header>
       <div className="body">
         <Search onChange={searchOnChange} />
+        <AddNewTicket onClick={addNewTicket} />
         <div className="restore-section">
           <Counter
             counter={counter}
@@ -79,14 +105,6 @@ function App() {
       </div>
     </div>
   );
-}
-
-function notShowIfHide(list) {
-  let filterArr = list.filter((ticket) => {
-    return !hideTickets.includes(ticket.id);
-  });
-
-  return filterArr;
 }
 
 export default App;

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const tickets = Router();
 const Ticket = require("../models/ticket");
+const path = require("path");
 
 tickets.get("/", (req, res) => {
   const { searchText } = req.query;
@@ -25,12 +26,33 @@ tickets.patch("/:ticketId/:isDone", (req, res) => {
       .then(() => {
         res.json({ updated: true });
       })
+
       .catch(() => {
         res.send({ error: "ID Not Found" });
       });
   } else {
     res.status(400).send({ Error: "Illegal request" });
   }
+});
+
+tickets.post("/", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  const ticket = new Ticket({
+    title: data.title,
+    content: data.content,
+    userEmail: data.email,
+    creationTime: new Date(),
+    labels: data.labels.length > 0 ? data.labels : null,
+  });
+  ticket
+    .save()
+    .then(() => {
+      res.status(200).redirect("../client/build");
+    })
+    .catch((err) => {
+      res.status(500).send(err.message);
+    });
 });
 
 module.exports = tickets;
