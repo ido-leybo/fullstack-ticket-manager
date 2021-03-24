@@ -11,7 +11,7 @@ let hideTickets = [];
 function App() {
   const [ticketsList, setTicketsList] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [showTickets, setShowTickets] = useState(0);
+  const [numOfShowTickets, setNumOfShowTickets] = useState(0);
 
   useEffect(() => {
     onLoad();
@@ -23,7 +23,7 @@ function App() {
       .then((ticket) => {
         const allTicketList = ticket.data;
         baseList = allTicketList;
-        setShowTickets(allTicketList.length);
+        setNumOfShowTickets(allTicketList.length);
         setTicketsList(allTicketList);
       })
       .catch((error) => {
@@ -34,8 +34,9 @@ function App() {
   const onSearch = (inputValue) => {
     axios.get(`/api/tickets?searchText=${inputValue}`).then((ticket) => {
       const allTicketList = ticket.data;
-      setTicketsList(allTicketList);
-      setShowTickets(allTicketList.length);
+      const filterList = notShowIfHide(allTicketList);
+      setTicketsList(filterList);
+      setNumOfShowTickets(allTicketList.length);
     });
   };
 
@@ -50,12 +51,12 @@ function App() {
       (ticketId) => ticket.id !== ticketId.id
     );
     setTicketsList(filterArray);
-    setShowTickets(filterArray.length);
+    setNumOfShowTickets(filterArray.length);
     setCounter(counter + 1);
   };
 
   const restoredTickets = () => {
-    setShowTickets(baseList.length);
+    setNumOfShowTickets(baseList.length);
     setTicketsList(baseList);
     hideTickets = [];
     setCounter(0);
@@ -70,7 +71,7 @@ function App() {
           <Counter
             counter={counter}
             hideList={hideTickets}
-            showTickets={showTickets}
+            showTickets={numOfShowTickets}
             onClick={restoredTickets}
           />
         </div>
@@ -78,6 +79,14 @@ function App() {
       </div>
     </div>
   );
+}
+
+function notShowIfHide(list) {
+  let filterArr = list.filter((ticket) => {
+    return !hideTickets.includes(ticket.id);
+  });
+
+  return filterArr;
 }
 
 export default App;

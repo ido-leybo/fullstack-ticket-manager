@@ -31,14 +31,16 @@ export default function Ticket({ ticket, hideTicket, ticketNotFound }) {
   };
   return (
     <div className="ticket">
-      <h1>{ticket.title}</h1>
-      <button className="hideTicketButton" onClick={() => hideTicket(ticket)}>
-        hide
-      </button>
+      <span>
+        <button className="hideTicketButton" onClick={() => hideTicket(ticket)}>
+          hide
+        </button>
+        <h1>{ticket.title}</h1>
+      </span>
       <p>{ticket.content}</p>
       <div className="details">
         <span>{ticket.userEmail}</span> | <span>{dateFormat()}</span>
-        <span>
+        <span className="label-span">
           {ticket.labels &&
             ticket.labels.map((label, i) => {
               return (
