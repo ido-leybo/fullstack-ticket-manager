@@ -8,10 +8,10 @@ export default function Counter({ counter, hideList, showTickets, onClick }) {
         <span className="show-tickets-number">
           Showing {showTickets} results
         </span>
-        <span id="hideTicketsCounter">{counter}</span> hidden ticket`s{" "}
+        {/*<span id="hideTicketsCounter">{counter}</span> hidden ticket`s{" "}
         <button id="restoreHideTickets" onClick={onClick}>
           restored
-        </button>
+    </button>*/}
       </div>
     );
   } else {

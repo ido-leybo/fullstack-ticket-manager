@@ -67,11 +67,16 @@ function App() {
       <div className="body">
         <Search onChange={searchOnChange} />
         <div className="restore-section">
+          <span>
+            <span id="hideTicketsCounter">{counter}</span> hidden ticket`s{" "}
+          </span>
+          <button id="restoreHideTickets" onClick={restoredTickets}>
+            restored
+          </button>
           <Counter
             counter={counter}
             hideList={hideTickets}
             showTickets={showTickets}
-            onClick={restoredTickets}
           />
         </div>
         <Tickets hideTicket={hideTicket} ticketsList={ticketsList} />
