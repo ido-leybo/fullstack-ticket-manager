@@ -42,13 +42,13 @@
 }
 
 .hideTicketButton {
-  background: rgba(32, 178, 171, 0);
+  background-color: rgba(32, 178, 171, 0);
+  color: rgba(32, 178, 171, 0);
   border: none;
   margin-left: 90%;
   font-family: cursive;
   font-size: 16px;
   text-decoration: underline;
-  /* display: none; */
 }
 
 .doneButton {
@@ -56,7 +56,7 @@
   background: none;
   border: none;
   width: fit-content;
-  /* display: none; */
+  display: none;
 }
 
 .deleteButton {
@@ -64,11 +64,11 @@
   background: none;
   border: none;
   width: fit-content;
-  /* display: none; */
+  display: none;
 }
 
-/* .ticket:hover .buttonsSpan .hideTicketButton {
-  display: inline-block;
+.ticket:hover .buttonsSpan .hideTicketButton {
+  color: black;
 }
 .ticket:hover .buttonsSpan .doneButton {
   display: inline-block;
@@ -78,11 +78,11 @@
 }
 
 .doneTicket:hover .buttonsSpan .hideTicketButton {
-  display: inline-block;
+  color: rgba(32, 178, 171, 0);
 }
 .doneTicket:hover .buttonsSpan .doneButton {
   display: inline-block;
 }
 .doneTicket:hover .buttonsSpan .deleteButton {
   display: inline-block;
-} */
+}
