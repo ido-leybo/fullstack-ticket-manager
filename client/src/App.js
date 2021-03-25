@@ -6,20 +6,8 @@ import Counter from "./components/Counter";
 import axios from "axios";
 import AddNewTicket from "./components/AddNewTicket";
 import Menu from "./components/Menu";
-
 require("dotenv").config();
-// const labels = [
-//   "Help",
-//   "Tech",
-//   "Guidelines",
-//   "Corvid",
-//   "Api",
-//   "Collapse",
-//   "Expand",
-//   "Login",
-//   "Problem",
-//   "Tutorial",
-// ];
+
 let baseList;
 function App() {
   const [ticketsList, setTicketsList] = useState([]);
@@ -171,15 +159,20 @@ function App() {
     setNumOfShowTickets(deleteTickets.length);
   };
 
+  const closeMainNav = () => {
+    document.getElementById("mySidenav").style.width = "0";
+  };
+
   return (
     <div className="App">
-      <header>Tickets Manager</header>
+      <header onClick={() => closeMainNav()}>Tickets Manager</header>
       <Menu
         showDoneTickets={showDoneTickets}
         refreshPage={refreshPage}
         showDeleteTickets={showDeleteTickets}
+        closeNav={closeMainNav}
       />
-      <div className="body">
+      <div className="body" onClick={() => closeMainNav()}>
         <Search onChange={searchOnChange} />
         <AddNewTicket onClick={refreshPage} />
         <div className="restore-section">

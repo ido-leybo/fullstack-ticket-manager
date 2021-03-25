@@ -65,7 +65,7 @@ tickets.put("/:ticketId/:isDelete", (req, res) => {
   } else {
     res.sendStatus(400);
   }
-  console.log(deleteCard);
+
   Ticket.findByIdAndUpdate(ticketId, { delete: deleteCard }, { new: true })
     .then(() => {
       res.json({ deleted: true });

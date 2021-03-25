@@ -27,15 +27,6 @@
   text-align: center;
 }
 
-.hideTicketButton {
-  background: rgba(32, 178, 171, 0);
-  border: none;
-  margin-left: 90%;
-  font-family: cursive;
-  font-size: 16px;
-  text-decoration: underline;
-}
-
 .label {
   background-color: rgb(18, 39, 49);
   color: antiquewhite;
@@ -45,8 +36,19 @@
   margin: 3px;
   border-radius: 5px;
 }
+
 .label-span {
   margin-left: 85%;
+}
+
+.hideTicketButton {
+  background: rgba(32, 178, 171, 0);
+  border: none;
+  margin-left: 90%;
+  font-family: cursive;
+  font-size: 16px;
+  text-decoration: underline;
+  /* display: none; */
 }
 
 .doneButton {
@@ -54,4 +56,33 @@
   background: none;
   border: none;
   width: fit-content;
+  /* display: none; */
 }
+
+.deleteButton {
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: fit-content;
+  /* display: none; */
+}
+
+/* .ticket:hover .buttonsSpan .hideTicketButton {
+  display: inline-block;
+}
+.ticket:hover .buttonsSpan .doneButton {
+  display: inline-block;
+}
+.ticket:hover .buttonsSpan .deleteButton {
+  display: inline-block;
+}
+
+.doneTicket:hover .buttonsSpan .hideTicketButton {
+  display: inline-block;
+}
+.doneTicket:hover .buttonsSpan .doneButton {
+  display: inline-block;
+}
+.doneTicket:hover .buttonsSpan .deleteButton {
+  display: inline-block;
+} */

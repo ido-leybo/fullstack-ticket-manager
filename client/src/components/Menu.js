@@ -5,14 +5,11 @@ export default function Menu({
   showDoneTickets,
   refreshPage,
   showDeleteTickets,
+  closeNav,
 }) {
   let className = "sidenav";
   const openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
-  };
-
-  const closeNav = () => {
-    document.getElementById("mySidenav").style.width = "0";
   };
 
   return (
@@ -44,7 +41,12 @@ export default function Menu({
         </span>
       </div>
       <span
-        style={{ fontSize: "30px", cursor: "pointer" }}
+        style={{
+          fontSize: "40px",
+          cursor: "pointer",
+          fontWeight: "bold",
+          fontFamily: "cursive",
+        }}
         onClick={() => openNav()}
       >
         &#9776; Menu

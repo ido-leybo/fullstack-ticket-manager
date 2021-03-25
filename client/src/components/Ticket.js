@@ -52,7 +52,7 @@ export default function Ticket({
 
   return (
     <div className={className}>
-      <span>
+      <span className="buttonsSpan">
         <button
           className={"hideTicketButton"}
           onClick={() => hideTicket(ticket)}
