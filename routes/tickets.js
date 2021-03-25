@@ -54,9 +54,19 @@ tickets.post("/", (req, res) => {
     });
 });
 
-tickets.put("/:ticketId", (req, res) => {
+tickets.put("/:ticketId/:isDelete", (req, res) => {
   const ticketId = req.params.ticketId;
-  Ticket.findByIdAndUpdate(ticketId, { delete: true }, { new: true })
+  const isDelete = req.params.isDelete;
+  let deleteCard;
+  if (isDelete === "delete") {
+    deleteCard = true;
+  } else if (isDelete === "restore") {
+    deleteCard = false;
+  } else {
+    res.sendStatus(400);
+  }
+  console.log(deleteCard);
+  Ticket.findByIdAndUpdate(ticketId, { delete: deleteCard }, { new: true })
     .then(() => {
       res.json({ deleted: true });
     })

@@ -7,6 +7,7 @@ export default function Tickets({
   doneTicket,
   doneTickets,
   deleteTicket,
+  deleteTickets,
 }) {
   if (ticketsList.length === 0) {
     const ticket = {
@@ -28,6 +29,7 @@ export default function Tickets({
           doneTicket={doneTicket}
           doneTickets={doneTickets}
           deleteTicket={deleteTicket}
+          deleteTickets={deleteTickets}
         />
       ))}
     </div>

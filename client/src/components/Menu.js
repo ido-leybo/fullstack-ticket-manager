@@ -1,7 +1,11 @@
 import React from "react";
 import "../styles/menu.css";
 
-export default function Menu({ showDoneTickets, refreshPage }) {
+export default function Menu({
+  showDoneTickets,
+  refreshPage,
+  showDeleteTickets,
+}) {
   let className = "sidenav";
   const openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
@@ -30,6 +34,13 @@ export default function Menu({ showDoneTickets, refreshPage }) {
           style={{ cursor: "pointer" }}
         >
           Done Tickets
+        </span>
+        <span
+          href={void 0}
+          onClick={() => showDeleteTickets()}
+          style={{ cursor: "pointer" }}
+        >
+          Recycle Bin
         </span>
       </div>
       <span

@@ -27,6 +27,7 @@ function App() {
   const [numOfShowTickets, setNumOfShowTickets] = useState(0);
   const [hideTickets, setHideTickets] = useState([]);
   const [doneTickets, setDoneTickets] = useState([]);
+  const [deleteTickets, setDeleteTickets] = useState([]);
 
   useEffect(() => {
     onLoad();
@@ -38,10 +39,16 @@ function App() {
       .then((ticket) => {
         const allTicketList = ticket.data;
         baseList = allTicketList;
-        allTicketList.forEach((ticketDone) => {
-          if (ticketDone.done) {
-            if (!doneTickets.includes(ticketDone)) {
-              doneTickets.push(ticketDone);
+        allTicketList.forEach((ticketItem) => {
+          if (ticketItem.done) {
+            if (!doneTickets.includes(ticketItem)) {
+              doneTickets.push(ticketItem);
+            }
+          }
+
+          if (ticketItem.delete) {
+            if (!deleteTickets.includes(ticketItem)) {
+              deleteTickets.push(ticketItem);
             }
           }
         });
@@ -50,6 +57,12 @@ function App() {
             return filterTicket;
           }
         });
+        const filterAfterrestore = allTicketList.filter((filterTicket) => {
+          if (filterTicket.delete) {
+            return filterTicket;
+          }
+        });
+        setDeleteTickets(filterAfterrestore);
         setNumOfShowTickets(filterAfterDelete.length);
         setTicketsList(filterAfterDelete);
       })
@@ -130,23 +143,42 @@ function App() {
     setNumOfShowTickets(doneTickets.length);
   };
 
-  const deleteTicket = (ticket) => {
+  const deleteTicket = (ticket, e) => {
+    let value = e.target.textContent;
+    e.target.textContent = value === "❌" ? "↩" : "❌";
     const ticketId = ticket.id;
-    axios
-      .put(`/api/tickets/${ticketId}`)
-      .then((data) => {
-        console.log(data);
-        onLoad();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    if (value === "❌") {
+      deleteTickets.push(ticket);
+      axios.put(`/api/tickets/${ticketId}/delete`);
+    } else {
+      axios.put(`/api/tickets/${ticketId}/restore`);
+
+      const filterArr = deleteTickets.filter(
+        (deleteTicket) => deleteTicket.id !== ticketId
+      );
+      console.log(filterArr);
+      setDeleteTickets(filterArr);
+      console.log("restore");
+    }
+
+    onLoad();
+  };
+
+  const showDeleteTickets = () => {
+    console.log(deleteTickets);
+    setTicketsList(deleteTickets);
+    setNumOfShowTickets(deleteTickets.length);
   };
 
   return (
     <div className="App">
       <header>Tickets Manager</header>
-      <Menu showDoneTickets={showDoneTickets} refreshPage={refreshPage} />
+      <Menu
+        showDoneTickets={showDoneTickets}
+        refreshPage={refreshPage}
+        showDeleteTickets={showDeleteTickets}
+      />
       <div className="body">
         <Search onChange={searchOnChange} />
         <AddNewTicket onClick={refreshPage} />
@@ -164,6 +196,7 @@ function App() {
           doneTicket={doneTicket}
           doneTickets={doneTickets}
           deleteTicket={deleteTicket}
+          deleteTickets={deleteTickets}
         />
       </div>
     </div>

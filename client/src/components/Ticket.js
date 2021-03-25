@@ -8,6 +8,7 @@ export default function Ticket({
   doneTicket,
   doneTickets,
   deleteTicket,
+  deleteTickets,
 }) {
   if (ticketNotFound) {
     return (
@@ -42,6 +43,12 @@ export default function Ticket({
   } else {
     className = "ticket";
   }
+  let deleteClassName;
+  if (deleteTickets.includes(ticket)) {
+    deleteClassName = "deletedTicket";
+  } else {
+    deleteClassName = "ticket";
+  }
 
   return (
     <div className={className}>
@@ -55,8 +62,11 @@ export default function Ticket({
         <button className="doneButton" onClick={(e) => doneTicket(ticket, e)}>
           {className === "doneTicket" ? "⛔" : "✅"}
         </button>
-        <button className="deleteButton" onClick={() => deleteTicket(ticket)}>
-          ❌
+        <button
+          className="deleteButton"
+          onClick={(e) => deleteTicket(ticket, e)}
+        >
+          {deleteClassName === "deletedTicket" ? "↩" : "❌"}
         </button>
         <h1>{ticket.title}</h1>
       </span>
