@@ -54,4 +54,14 @@ tickets.post("/", (req, res) => {
     });
 });
 
+tickets.put("/:ticketId", (req, res) => {
+  const ticketId = req.params.ticketId;
+  Ticket.findByIdAndUpdate(ticketId, { delete: true }, { new: true })
+    .then(() => {
+      res.json({ deleted: true });
+    })
+    .catch(() => {
+      res.send({ error: "ID Not Found" });
+    });
+});
 module.exports = tickets;

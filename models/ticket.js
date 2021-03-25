@@ -24,6 +24,10 @@ const ticketSchema = new mongoose.Schema({
   labels: {
     type: [String],
   },
+  delete: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 ticketSchema.set("toJSON", {

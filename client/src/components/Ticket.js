@@ -7,6 +7,7 @@ export default function Ticket({
   ticketNotFound,
   doneTicket,
   doneTickets,
+  deleteTicket,
 }) {
   if (ticketNotFound) {
     return (
@@ -53,6 +54,9 @@ export default function Ticket({
         </button>
         <button className="doneButton" onClick={(e) => doneTicket(ticket, e)}>
           {className === "doneTicket" ? "⛔" : "✅"}
+        </button>
+        <button className="deleteButton" onClick={() => deleteTicket(ticket)}>
+          ❌
         </button>
         <h1>{ticket.title}</h1>
       </span>

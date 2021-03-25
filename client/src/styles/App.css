@@ -8,7 +8,10 @@
     rgba(13, 134, 159, 1) 100%
   );
 }
-
+.body {
+  min-height: 100vh;
+  max-height: fit-content;
+}
 header {
   font-size: 100px;
   background: rgb(25, 156, 158);

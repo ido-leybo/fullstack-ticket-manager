@@ -13,24 +13,6 @@ export default function AddNewTicket({ onClick }) {
     currentDiv.style.display = "none";
   };
 
-  //   const onSubmit = (event) => {
-  //     event.preventDefault();
-  //     const formData = event.target;
-  //     const title = formData.children[2].value;
-  //     const content = formData.children[4].value;
-  //     const userEmail = formData.children[6].value;
-  //     const labels = formData.children[8].value;
-  //     const data = new FormData();
-  //     data.append("title", title);
-  //     data.append("content", content);
-  //     data.append("userEmail", userEmail);
-  //     data.append("labels", labels);
-  //     console.log(data.get("title"));
-  //     axios.post("/api/tickets", data).then((res) => {
-  //       console.log(res);
-  //     });
-  //   };
-
   return (
     <>
       <button className="open-button" onClick={openForm}>

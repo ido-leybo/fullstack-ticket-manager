@@ -6,6 +6,7 @@ export default function Tickets({
   hideTicket,
   doneTicket,
   doneTickets,
+  deleteTicket,
 }) {
   if (ticketsList.length === 0) {
     const ticket = {
@@ -26,6 +27,7 @@ export default function Tickets({
           hideTicket={hideTicket}
           doneTicket={doneTicket}
           doneTickets={doneTickets}
+          deleteTicket={deleteTicket}
         />
       ))}
     </div>

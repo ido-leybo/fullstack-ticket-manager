@@ -45,8 +45,13 @@ function App() {
             }
           }
         });
-        setNumOfShowTickets(allTicketList.length);
-        setTicketsList(allTicketList);
+        const filterAfterDelete = allTicketList.filter((filterTicket) => {
+          if (!filterTicket.delete) {
+            return filterTicket;
+          }
+        });
+        setNumOfShowTickets(filterAfterDelete.length);
+        setTicketsList(filterAfterDelete);
       })
       .catch((error) => {
         console.log(error);
@@ -57,8 +62,13 @@ function App() {
     axios.get(`/api/tickets?searchText=${inputValue}`).then((ticket) => {
       const allTicketList = ticket.data;
       const filterList = notShowIfHide(allTicketList);
-      setTicketsList(filterList);
-      setNumOfShowTickets(filterList.length);
+      const filterAfterDelete = filterList.filter((filterTicket) => {
+        if (!filterTicket.delete) {
+          return filterTicket;
+        }
+      });
+      setTicketsList(filterAfterDelete);
+      setNumOfShowTickets(filterAfterDelete.length);
     });
   };
 
@@ -120,6 +130,19 @@ function App() {
     setNumOfShowTickets(doneTickets.length);
   };
 
+  const deleteTicket = (ticket) => {
+    const ticketId = ticket.id;
+    axios
+      .put(`/api/tickets/${ticketId}`)
+      .then((data) => {
+        console.log(data);
+        onLoad();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="App">
       <header>Tickets Manager</header>
@@ -140,6 +163,7 @@ function App() {
           ticketsList={ticketsList}
           doneTicket={doneTicket}
           doneTickets={doneTickets}
+          deleteTicket={deleteTicket}
         />
       </div>
     </div>
