@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const tickets = Router();
 const Ticket = require("../models/ticket");
-const path = require("path");
 
 tickets.get("/", (req, res) => {
   const { searchText } = req.query;
@@ -48,7 +47,7 @@ tickets.post("/", (req, res) => {
   ticket
     .save()
     .then(() => {
-      res.status(200).redirect("../client/build");
+      res.status(200).redirect("/");
     })
     .catch((err) => {
       res.status(500).send(err.message);
