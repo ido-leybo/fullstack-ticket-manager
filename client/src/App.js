@@ -5,6 +5,7 @@ import Tickets from "./components/Tickets";
 import Counter from "./components/Counter";
 import axios from "axios";
 import AddNewTicket from "./components/AddNewTicket";
+import Menu from "./components/Menu";
 
 require("dotenv").config();
 // const labels = [
@@ -39,10 +40,11 @@ function App() {
         baseList = allTicketList;
         allTicketList.forEach((ticketDone) => {
           if (ticketDone.done) {
-            doneTickets.push(ticketDone);
+            if (!doneTickets.includes(ticketDone)) {
+              doneTickets.push(ticketDone);
+            }
           }
         });
-        console.log(allTicketList);
         setNumOfShowTickets(allTicketList.length);
         setTicketsList(allTicketList);
       })
@@ -90,7 +92,7 @@ function App() {
     return filterArr;
   };
 
-  const addNewTicket = () => {
+  const refreshPage = () => {
     onLoad();
   };
 
@@ -111,15 +113,20 @@ function App() {
       axios.patch(`/api/tickets/${ticket.id}/undone`);
       setDoneTickets(filterArr);
     }
-    console.log(doneTickets);
+  };
+
+  const showDoneTickets = () => {
+    setTicketsList(doneTickets);
+    setNumOfShowTickets(doneTickets.length);
   };
 
   return (
     <div className="App">
       <header>Tickets Manager</header>
+      <Menu showDoneTickets={showDoneTickets} refreshPage={refreshPage} />
       <div className="body">
         <Search onChange={searchOnChange} />
-        <AddNewTicket onClick={addNewTicket} />
+        <AddNewTicket onClick={refreshPage} />
         <div className="restore-section">
           <Counter
             counter={counter}
