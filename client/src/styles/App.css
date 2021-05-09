@@ -1,0 +1,43 @@
+.App {
+  align-items: center;
+  background: rgb(4, 82, 107);
+  background: linear-gradient(
+    90deg,
+    rgba(4, 82, 107, 1) 2%,
+    rgba(0, 67, 97, 1) 76%,
+    rgba(13, 134, 159, 1) 100%
+  );
+}
+.body {
+  min-height: 100vh;
+  max-height: fit-content;
+}
+header {
+  font-size: 100px;
+  background: rgb(25, 156, 158);
+  background: linear-gradient(
+    0deg,
+    rgba(25, 156, 158, 0.8463760504201681) 9%,
+    rgba(7, 106, 126, 1) 59%,
+    rgba(10, 101, 138, 1) 97%
+  );
+  padding: 40px;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 0;
+  font-family: cursive;
+}
+p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+button {
+  font-weight: bold;
+  cursor: pointer;
+}

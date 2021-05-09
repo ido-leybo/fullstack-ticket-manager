@@ -1,0 +1,88 @@
+.ticket {
+  background: rgba(172, 213, 214, 0.658);
+  width: 90vw;
+  margin-left: 3vw;
+  margin-right: 5vw;
+  border-radius: 50px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.doneTicket {
+  background: gray;
+  width: 90vw;
+  margin-left: 3vw;
+  margin-right: 5vw;
+  border-radius: 50px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.ticket-notFound {
+  background: rgba(172, 213, 214, 0.658);
+  width: 90vw;
+  margin-left: 5vw;
+  border-radius: 50px;
+  padding: 20px;
+  text-align: center;
+}
+
+.label {
+  background-color: rgb(18, 39, 49);
+  color: antiquewhite;
+  font-size: 18px;
+  font-family: cursive;
+  font-weight: 400;
+  margin: 3px;
+  border-radius: 5px;
+}
+
+.label-span {
+  margin-left: 85%;
+}
+
+.hideTicketButton {
+  background-color: rgba(32, 178, 171, 0);
+  color: rgba(32, 178, 171, 0);
+  border: none;
+  margin-left: 90%;
+  font-family: cursive;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.doneButton {
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: fit-content;
+  display: none;
+}
+
+.deleteButton {
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: fit-content;
+  display: none;
+}
+
+.ticket:hover .buttonsSpan .hideTicketButton {
+  color: black;
+}
+.ticket:hover .buttonsSpan .doneButton {
+  display: inline-block;
+}
+.ticket:hover .buttonsSpan .deleteButton {
+  display: inline-block;
+}
+
+.doneTicket:hover .buttonsSpan .hideTicketButton {
+  color: rgba(32, 178, 171, 0);
+}
+.doneTicket:hover .buttonsSpan .doneButton {
+  display: inline-block;
+}
+.doneTicket:hover .buttonsSpan .deleteButton {
+  display: inline-block;
+}
