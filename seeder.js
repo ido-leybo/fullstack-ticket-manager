@@ -2,6 +2,8 @@ require("dotenv").config();
 const { Seeder } = require("mongo-seeding");
 const path = require("path");
 
+// create a seed for the first data in the database
+
 function seed(database) {
   const config = {
     database: database,

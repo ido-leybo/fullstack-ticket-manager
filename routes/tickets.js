@@ -2,6 +2,7 @@ const { Router } = require("express");
 const tickets = Router();
 const Ticket = require("../models/ticket");
 
+// get all tickets and with filtering of search
 tickets.get("/", (req, res) => {
   const { searchText } = req.query;
   Ticket.find({ title: new RegExp(searchText, "i") }).then((data) => {
@@ -9,6 +10,7 @@ tickets.get("/", (req, res) => {
   });
 });
 
+// mark if the ticket is "done" or "undone"
 tickets.patch("/:ticketId/:isDone", (req, res) => {
   const id = req.params.ticketId;
   const isDone = req.params.isDone;
@@ -34,6 +36,7 @@ tickets.patch("/:ticketId/:isDone", (req, res) => {
   }
 });
 
+// add new ticket
 tickets.post("/", (req, res) => {
   const data = req.body;
   console.log(data);
@@ -54,6 +57,7 @@ tickets.post("/", (req, res) => {
     });
 });
 
+// delete and restore tickets
 tickets.put("/:ticketId/:isDelete", (req, res) => {
   const ticketId = req.params.ticketId;
   const isDelete = req.params.isDelete;
