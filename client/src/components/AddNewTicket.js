@@ -1,4 +1,3 @@
-// import axios from "axios";
 import React from "react";
 import "../styles/addNewTicket.css";
 
@@ -26,6 +25,7 @@ export default function AddNewTicket({ onClick }) {
             <b>Title</b>
           </label>
           <input
+            id="titleInput"
             type="text"
             placeholder="Enter your title"
             name="title"
@@ -36,6 +36,7 @@ export default function AddNewTicket({ onClick }) {
             <b>Content</b>
           </label>
           <input
+            id="contentInput"
             type="text"
             placeholder="Enter content"
             name="content"
@@ -46,6 +47,7 @@ export default function AddNewTicket({ onClick }) {
             <b>Email</b>
           </label>
           <input
+            id="emailInput"
             type="text"
             placeholder="Enter email"
             name="email"
@@ -53,11 +55,21 @@ export default function AddNewTicket({ onClick }) {
           ></input>
           <br />
           <label htmlFor="labels">
-            <b>Labels</b>
+            <b>Label</b>
           </label>
-          <input type="text" placeholder="Enter labels" name="labels"></input>
+          <input
+            id="labelInput"
+            type="text"
+            placeholder="Enter label"
+            name="labels"
+          ></input>
 
-          <button onClick={onClick} type="submit" className="btn">
+          <button
+            id="addButton"
+            onClick={onClick}
+            type="submit"
+            className="btn"
+          >
             Add
           </button>
           <button type="button" className="btn cancel" onClick={closeForm}>
